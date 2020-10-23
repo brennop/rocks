@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="engine">
+    <CLASSES>
+      <root url="jar://D:/jetbrains/engine/litiengine-v0.5.0-beta.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <NATIVE>
+      <root url="file://D:/jetbrains/engine" />
+    </NATIVE>
+    <SOURCES />
+  </library>
+</component>
