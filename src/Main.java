@@ -1,17 +1,18 @@
-import de.gurkenlabs.litiengine.Game;
-import de.gurkenlabs.litiengine.gui.screens.GameScreen;
+import javax.swing.*;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+public class Main extends JFrame {
+    public Main() {
+        setTitle("rocks v0.0.1");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Game game = new Game();
+        setContentPane(game);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+        game.run();
+    }
 
-public class Main {
     public static void main(String[] args) {
-        Game.info().setName("rocks");
-        Game.info().setSubTitle("");
-        Game.info().setVersion("v0.0.1");
-        Game.init(args);
-        Game.start();
+        new Main();
     }
 }
