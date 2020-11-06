@@ -17,7 +17,6 @@ public class Game extends JPanel {
        requestFocus();
        setBackground(new Color(0, 0, 0));
 
-       ship = new Object(this);
        isRunning = true;
     };
 
@@ -30,7 +29,6 @@ public class Game extends JPanel {
 
             while( frameTime > 0.0 ) {
                 double deltaTime = Math.min(frameTime, TARGET_FRAME_TIME);
-                ship.update(deltaTime / 1000000);
                 frameTime -= deltaTime;
             }
 
@@ -45,6 +43,5 @@ public class Game extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        ship.draw(g);
     }
 }
