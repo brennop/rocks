@@ -5,7 +5,7 @@ public class Main extends JFrame {
         setTitle("rocks v0.0.1");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Game game = new Game();
-        setContentPane(game);
+        setContentPane(game.getCurrentScene());
         pack();
         setLocationRelativeTo(null);
         setVisible(true);

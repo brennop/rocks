@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Game extends JPanel {
+public class Game {
     private final double TARGET_FPS = 60;
     private final double TARGET_FRAME_TIME = 1000000000 / TARGET_FPS;
 
@@ -11,13 +11,16 @@ public class Game extends JPanel {
     private Object ship;
     private boolean isRunning = false;
 
-    public Game() {
-       setPreferredSize(new Dimension(640, 480));
-       setFocusable(true);
-       requestFocus();
-       setBackground(new Color(0, 0, 0));
+    public Scene getCurrentScene() {
+        return currentScene;
+    }
 
+    private Scene currentScene;
+
+    public Game() {
        isRunning = true;
+
+       this.currentScene = new Scene();
     };
 
     public void run() {
@@ -30,18 +33,12 @@ public class Game extends JPanel {
             while( frameTime > 0.0 ) {
                 double deltaTime = Math.min(frameTime, TARGET_FRAME_TIME);
                 frameTime -= deltaTime;
+                this.currentScene.update(deltaTime);
             }
-
-            this.repaint();
 
             try {
                 Thread.sleep(10);
             } catch(Exception e) {}
         }
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
     }
 }
