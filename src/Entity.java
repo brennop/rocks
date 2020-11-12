@@ -9,15 +9,15 @@ public class Entity {
     private int y;
     private double rotation;
     private float speed;
-    private JPanel game;
+    private Scene scene;
     private BufferedImage texture;
 
-    public Entity(int x, int y, double rotation, float speed, JPanel game) {
+    public Entity(int x, int y, double rotation, float speed, Scene scene) {
         this.x = x;
         this.y = y;
         this.rotation = rotation;
         this.speed = speed;
-        this.game = game;
+        this.scene = scene;
 
         try {
             texture = ImageIO.read(new File("assets/ship.png"));
@@ -27,13 +27,14 @@ public class Entity {
     }
 
     public void draw(Graphics g) {
-        g.drawImage(texture, x, y, this.game);
+        g.drawImage(texture, x, y, this.scene);
     }
 
     public void update(double dt) {
     }
 
     public void destroy() {
+        this.scene.remove(this);
     }
 
     public void onCollision(Entity entity) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Scene extends JPanel {
     private ArrayList<Entity> entities = new ArrayList();
+    private ArrayList<Entity> toRemove = new ArrayList();
 
     public Scene() {
         this.start();
@@ -48,9 +49,16 @@ public class Scene extends JPanel {
     }
 
     public void update(double dt) {
+        // reseta a lista de remoção
+        this.toRemove = new ArrayList();
+
         for (Entity entity: this.entities) {
             entity.update(dt);
         }
+
+        // remove os items depois da iteração
+        // para evitar um ConcurrentModificationException
+        entities.removeAll(toRemove);
         this.repaint();
     }
 
@@ -58,6 +66,11 @@ public class Scene extends JPanel {
         for (Entity entity: this.entities) {
             entity.draw(g);
         }
+    }
+
+    public void remove(Entity entity) {
+        // adiciona a lista para remoção ao final do update
+        this.toRemove.add(entity);
     }
 
     @Override
