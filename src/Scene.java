@@ -19,7 +19,8 @@ public class Scene extends JPanel {
         Entity entity = new Entity(
                 50,
                 50,
-                0.0,
+                Math.toRadians(30),
+                32,
                 0.0f,
                 this
         );
@@ -29,7 +30,8 @@ public class Scene extends JPanel {
         Entity entity2 = new Entity(
                 100,
                 100,
-                0.0,
+                Math.toRadians(60),
+                32,
                 0.0f,
                 this
         );
@@ -39,7 +41,8 @@ public class Scene extends JPanel {
         Entity entity3 = new Entity(
                 150,
                 150,
-                0.0,
+                Math.toRadians(180),
+                32,
                 0.0f,
                 this
         );

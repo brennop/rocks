@@ -1,23 +1,23 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class Entity {
-    private int x;
-    private int y;
-    private double rotation;
+    private int size;
     private float speed;
+    private Transform transform;
     private JPanel game;
     private BufferedImage texture;
 
-    public Entity(int x, int y, double rotation, float speed, JPanel game) {
-        this.x = x;
-        this.y = y;
-        this.rotation = rotation;
+    public Entity(int x, int y, double rotation, int size, float speed, JPanel game) {
         this.speed = speed;
         this.game = game;
+        this.size = size;
+
+        this.transform = new Transform(x, y, rotation, size);
 
         try {
             texture = ImageIO.read(new File("assets/ship.png"));
@@ -27,10 +27,12 @@ public class Entity {
     }
 
     public void draw(Graphics g) {
-        g.drawImage(texture, x, y, this.game);
+        Graphics2D g2d = (Graphics2D) g; // transforma no Graphics em um Graphics2D
+        g2d.drawImage(this.texture, this.transform.getTransform(), this.game);
     }
 
     public void update(double dt) {
+        this.transform.rotate(0.00000000001 * dt);
     }
 
     public void destroy() {

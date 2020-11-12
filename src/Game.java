@@ -8,7 +8,6 @@ public class Game {
     // precisamos de uma thread para fazer o loop esperar
     // o período
     private Thread thread;
-    private Object ship;
     private boolean isRunning = false;
 
     public Scene getCurrentScene() {
