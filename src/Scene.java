@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Scene extends JPanel {
     private ArrayList<Entity> entities = new ArrayList();
-    private double time;
 
     public Scene() {
         this.start();
@@ -18,10 +17,10 @@ public class Scene extends JPanel {
     }
 
     public void update(double dt) {
-        time += dt;
         for (Entity entity: this.entities) {
-            entity.update(dt, time);
+            entity.update(dt);
         }
+
         this.repaint();
     }
 
@@ -29,6 +28,10 @@ public class Scene extends JPanel {
         for (Entity entity: this.entities) {
             entity.draw(g);
         }
+    }
+
+    protected void instantiate(Entity entity) {
+        this.entities.add(entity);
     }
 
     @Override

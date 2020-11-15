@@ -6,12 +6,12 @@ import java.io.File;
 
 public class Entity {
     private final int size;
-    private final float speed;
-    private final Transform transform;
+    protected final float speed;
+    protected final Transform transform;
     private final JPanel game;
     private BufferedImage texture;
 
-    public Entity(int x, int y, double rotation, int size, float speed, JPanel game) {
+    public Entity(int x, int y, double rotation, int size, float speed, String filename, JPanel game) {
         this.speed = speed;
         this.game = game;
         this.size = size;
@@ -19,7 +19,7 @@ public class Entity {
         this.transform = new Transform(x, y, rotation, size);
 
         try {
-            texture = ImageIO.read(new File("assets/ship.png"));
+            texture = ImageIO.read(new File("assets/" + filename + ".png"));
         } catch (Exception exception) {
             assert false;
         }
@@ -30,8 +30,7 @@ public class Entity {
         g2d.drawImage(this.texture, this.transform.getTransform(), this.game); // desenha a imagem na tela usando o transform
     }
 
-    public void update(double dt, double time) {
-        this.transform.rotate(0.01 * dt);
+    public void update(double dt) {
     }
 
     public void destroy() {
