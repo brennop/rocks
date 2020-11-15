@@ -30,7 +30,7 @@ public class Entity {
         g2d.drawImage(this.texture, this.transform.getTransform(), this.game); // desenha a imagem na tela usando o transform
     }
 
-    public void update(double dt) {
+    public void update(double dt, double time) {
         this.transform.rotate(0.01 * dt);
     }
 

@@ -4,55 +4,23 @@ import java.util.ArrayList;
 
 public class Scene extends JPanel {
     private ArrayList<Entity> entities = new ArrayList();
+    private double time;
 
     public Scene() {
         this.start();
     }
 
-    private void start() {
+    protected void start() {
         setPreferredSize(new Dimension(640, 480));
         setFocusable(true);
         requestFocus();
         setBackground(new Color(0, 0, 0));
-
-        // teste entidade
-        Entity entity = new Entity(
-                50,
-                50,
-                Math.toRadians(30),
-                32,
-                0.0f,
-                this
-        );
-
-        entities.add(entity);
-
-        Entity entity2 = new Entity(
-                100,
-                100,
-                Math.toRadians(60),
-                32,
-                0.0f,
-                this
-        );
-
-        entities.add(entity2);
-
-        Entity entity3 = new Entity(
-                150,
-                150,
-                Math.toRadians(180),
-                32,
-                0.0f,
-                this
-        );
-
-        entities.add(entity3);
     }
 
     public void update(double dt) {
+        time += dt;
         for (Entity entity: this.entities) {
-            entity.update(dt);
+            entity.update(dt, time);
         }
         this.repaint();
     }
