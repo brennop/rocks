@@ -1,5 +1,5 @@
 public class GameScene extends Scene {
-    private final double asteroidInterval = 2000;
+    private final double asteroidInterval = 1000;
     private double timeToNextAsteroid = 0;
 
     @Override

@@ -5,10 +5,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class Entity {
-    private final int size;
+    protected final int size;
     protected final float speed;
     protected final Transform transform;
-    private final JPanel game;
+    protected final JPanel game;
     private BufferedImage texture;
 
     public Entity(int x, int y, double rotation, int size, float speed, String filename, JPanel game) {
