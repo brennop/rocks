@@ -6,14 +6,16 @@ import java.io.File;
 
 public class Entity {
     private final int size;
-    private final float speed;
-    private final Transform transform;
-    private final JPanel game;
+    private double rotation;
+    private float speed;
+    private Scene scene;
     private BufferedImage texture;
+    private final Transform transform;
 
-    public Entity(int x, int y, double rotation, int size, float speed, JPanel game) {
+    public Entity(int x, int y, double rotation, int size, float speed, Scene scene) {
+        this.rotation = rotation;
         this.speed = speed;
-        this.game = game;
+        this.scene = scene;
         this.size = size;
 
         this.transform = new Transform(x, y, rotation, size);
@@ -27,7 +29,7 @@ public class Entity {
 
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g; // transforma no Graphics em um Graphics2D
-        g2d.drawImage(this.texture, this.transform.getTransform(), this.game); // desenha a imagem na tela usando o transform
+        g2d.drawImage(this.texture, this.transform.getTransform(), this.scene); // desenha a imagem na tela usando o transform
     }
 
     public void update(double dt) {
@@ -35,6 +37,7 @@ public class Entity {
     }
 
     public void destroy() {
+        this.scene.remove(this);
     }
 
     public void onCollision(Entity entity) {
