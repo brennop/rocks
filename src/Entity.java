@@ -5,15 +5,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class Entity {
-    private final int size;
-    private double rotation;
-    private float speed;
-    private Scene scene;
+    protected final int size;
+    protected final float speed;
+    protected final Transform transform;
+    protected final Scene scene;
     private BufferedImage texture;
-    private final Transform transform;
 
-    public Entity(int x, int y, double rotation, int size, float speed, Scene scene) {
-        this.rotation = rotation;
+    public Entity(int x, int y, double rotation, int size, float speed, String filename, Scene scene) {
         this.speed = speed;
         this.scene = scene;
         this.size = size;
@@ -21,7 +19,7 @@ public class Entity {
         this.transform = new Transform(x, y, rotation, size);
 
         try {
-            texture = ImageIO.read(new File("assets/ship.png"));
+            texture = ImageIO.read(new File("assets/" + filename + ".png"));
         } catch (Exception exception) {
             assert false;
         }
@@ -33,7 +31,6 @@ public class Entity {
     }
 
     public void update(double dt) {
-        this.transform.rotate(0.01 * dt);
     }
 
     public void destroy() {
