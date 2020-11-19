@@ -5,32 +5,33 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class Entity {
-    private int x;
-    private int y;
-    private double rotation;
-    private float speed;
-    private JPanel game;
+    private final int size;
+    private final float speed;
+    private final Transform transform;
+    private final JPanel game;
     private BufferedImage texture;
 
-    public Entity(int x, int y, double rotation, float speed, JPanel game) {
-        this.x = x;
-        this.y = y;
-        this.rotation = rotation;
+    public Entity(int x, int y, double rotation, int size, float speed, JPanel game) {
         this.speed = speed;
         this.game = game;
+        this.size = size;
+
+        this.transform = new Transform(x, y, rotation, size);
 
         try {
             texture = ImageIO.read(new File("assets/ship.png"));
-        } catch(Exception exception) {
+        } catch (Exception exception) {
             assert false;
         }
     }
 
     public void draw(Graphics g) {
-        g.drawImage(texture, x, y, this.game);
+        Graphics2D g2d = (Graphics2D) g; // transforma no Graphics em um Graphics2D
+        g2d.drawImage(this.texture, this.transform.getTransform(), this.game); // desenha a imagem na tela usando o transform
     }
 
     public void update(double dt) {
+        this.transform.rotate(0.01 * dt);
     }
 
     public void destroy() {

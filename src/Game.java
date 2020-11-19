@@ -1,6 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
-
 public class Game {
     private final double TARGET_FPS = 60;
     private final double TARGET_FRAME_TIME = 1000000000 / TARGET_FPS;
@@ -8,20 +5,18 @@ public class Game {
     // precisamos de uma thread para fazer o loop esperar
     // o período
     private Thread thread;
-    private Object ship;
     private boolean isRunning = false;
+    private final Scene currentScene;
+
+    public Game() {
+        isRunning = true;
+
+        this.currentScene = new Scene();
+    }
 
     public Scene getCurrentScene() {
         return currentScene;
     }
-
-    private Scene currentScene;
-
-    public Game() {
-       isRunning = true;
-
-       this.currentScene = new Scene();
-    };
 
     public void run() {
         long lastTime = System.nanoTime();
@@ -30,15 +25,16 @@ public class Game {
             long frameTime = newTime - lastTime;
             lastTime = newTime;
 
-            while( frameTime > 0.0 ) {
+            while (frameTime > 0.0) {
                 double deltaTime = Math.min(frameTime, TARGET_FRAME_TIME);
+                this.currentScene.update(deltaTime / 1000000);
                 frameTime -= deltaTime;
-                this.currentScene.update(deltaTime);
             }
 
             try {
-                Thread.sleep(10);
-            } catch(Exception e) {}
+                Thread.sleep(1);
+            } catch (Exception e) {
+            }
         }
     }
 }
