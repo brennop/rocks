@@ -1,10 +1,9 @@
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class Entity {
+public abstract class Entity {
     protected final int size;
     protected final float speed;
     protected final Transform transform;
@@ -25,18 +24,16 @@ public class Entity {
         }
     }
 
-    public void draw(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g; // transforma no Graphics em um Graphics2D
-        g2d.drawImage(this.texture, this.transform.getTransform(), this.scene); // desenha a imagem na tela usando o transform
-    }
+    public abstract void update(double dt);
 
-    public void update(double dt) {
+    public abstract void onCollision(Entity entity);
+
+    public void draw(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g; // transforma o Graphics em um Graphics2D
+        g2d.drawImage(this.texture, (int) this.transform.getX() - size / 2, (int) this.transform.getY() - size / 2, this.scene); // desenha a imagem na tela usando o transform
     }
 
     public void destroy() {
         this.scene.remove(this);
-    }
-
-    public void onCollision(Entity entity) {
     }
 }

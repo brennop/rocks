@@ -6,13 +6,11 @@ public class Asteroid extends Entity {
         super((int) (Math.random() * scene.getWidth()),
                 (int) (Math.random() * scene.getHeight()),
                 Math.toRadians(Math.random() * 180),
-                20, 0.1f, "asteroid", scene);
+                40, 0.1f, "asteroid", scene);
     }
 
     @Override
     public void update(double dt) {
-        super.update(dt);
-
         this.transform.translate(this.speed * dt, this.speed * dt);
 
         // Se sair da tela deve ser destruido
@@ -23,5 +21,9 @@ public class Asteroid extends Entity {
                 position.getY() < 0 - size) {
             this.destroy();
         }
+    }
+
+    @Override
+    public void onCollision(Entity entity) {
     }
 }

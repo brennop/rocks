@@ -19,9 +19,17 @@ public class Transform {
         return new Point((int) affineTransform.getTranslateX(), (int) affineTransform.getTranslateY());
     }
 
+    public double getX() {
+        return affineTransform.getTranslateX();
+    }
+
+    public double getY() {
+        return affineTransform.getTranslateY();
+    }
+
     public void rotate(double theta) {
-        this.rotation = rotation;
-        this.affineTransform.rotate(theta, this.size / 2, this.size / 2);
+        this.rotation = theta;
+        this.affineTransform.rotate(theta, this.size / 2.0, this.size / 2.0);
     }
 
     public void translate(double dx, double dy) {
