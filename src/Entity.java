@@ -6,8 +6,8 @@ import java.io.File;
 
 public class Entity {
     protected final int size;
-    protected final float speed;
-    protected final Transform transform;
+    protected float speed;
+    protected Transform transform;
     protected final Scene scene;
     private BufferedImage texture;
 
@@ -28,6 +28,14 @@ public class Entity {
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g; // transforma no Graphics em um Graphics2D
         g2d.drawImage(this.texture, this.transform.getTransform(), this.scene); // desenha a imagem na tela usando o transform
+    }
+
+    public void resetPosition(int x, int y) {
+        double rotation = Math.atan2(
+                this.transform.affineTransform.getShearY(),
+                this.transform.affineTransform.getScaleY()
+        );
+        this.transform = new Transform(x, y, rotation, this.size);
     }
 
     public void update(double dt) {

@@ -1,9 +1,10 @@
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Point2D;
 
 public class Transform {
-    private final AffineTransform affineTransform;
+    protected final AffineTransform affineTransform;
     private final int size;
     private double rotation;
 
@@ -17,6 +18,10 @@ public class Transform {
 
     public Point2D getPosition() {
         return new Point((int) affineTransform.getTranslateX(), (int) affineTransform.getTranslateY());
+    }
+
+    public void setTransform(AffineTransform affineTransform) {
+        affineTransform.setTransform(affineTransform);
     }
 
     public void rotate(double theta) {
