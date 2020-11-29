@@ -29,6 +29,10 @@ public class Transform {
         this.affineTransform.rotate(theta, this.size / 2, this.size / 2);
     }
 
+    public double getRotation() {
+        return rotation;
+    }
+
     public void translate(double dx, double dy) {
         this.affineTransform.translate(dx, dy);
     }
