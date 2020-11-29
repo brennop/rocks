@@ -1,5 +1,5 @@
 public class GameScene extends Scene {
-    private final double asteroidInterval = 1000;
+    private final double asteroidInterval = 1000.0;
     private double timeToNextAsteroid = 0;
     private Player player;
 

@@ -3,13 +3,9 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Scene extends JPanel {
-    private ArrayList<Entity> entities = new ArrayList();
+    protected ArrayList<Entity> entities = new ArrayList();
     private ArrayList<Entity> toRemove = new ArrayList();
     protected KeyListener keyListener = new KeyListener();
-
-    public Scene() {
-        this.start();
-    }
 
     protected void start() {
         setPreferredSize(new Dimension(640, 480));
@@ -36,9 +32,23 @@ public class Scene extends JPanel {
             entity.update(dt);
         }
 
+        for (Entity firstEntity : entities) {
+            for(Entity secondEntity : entities) {
+                if(firstEntity != secondEntity) {
+                    double distance = firstEntity.transform.getPosition().distanceSq(secondEntity.transform.getPosition());
+                    double radius = firstEntity.size / 2.0 + secondEntity.size / 2.0;
+                    if(distance < radius * radius) {
+                        firstEntity.onCollision(secondEntity);
+                        secondEntity.onCollision(firstEntity);
+                    }
+                }
+            }
+        }
+
         // remove os items depois da iteração
         // para evitar um ConcurrentModificationException
         entities.removeAll(toRemove);
+
         this.repaint();
     }
 

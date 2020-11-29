@@ -33,7 +33,6 @@ public class Player extends Entity {
 
     @Override
     public void update(double dt) {
-        super.update(dt);
         KeyListener kl = scene.getKeyListener();
 
         // Realiza a rotação
@@ -69,4 +68,11 @@ public class Player extends Entity {
         this.velocity.add(-this.velocity.getX() * linearDamping * dt * 0.0001, -this.velocity.getY() * linearDamping * dt * 0.0001);
         this.angularVelocity -= this.angularVelocity * angularDamping * dt * 0.0001;
     }
+
+    @Override
+    public void onCollision(Entity entity) {
+        System.out.println("collision");
+    }
+
+
 }
