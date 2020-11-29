@@ -9,6 +9,12 @@ public class GameScene extends Scene {
 
         player = new Player(this);
         this.instantiate(player);
+
+        this.keyListener.bindKey("SPACE", 32);
+        this.keyListener.bindKey("UP", 87);
+        this.keyListener.bindKey("DOWN", 83);
+        this.keyListener.bindKey("LEFT", 65);
+        this.keyListener.bindKey("RIGHT", 68);
     }
 
     @Override
