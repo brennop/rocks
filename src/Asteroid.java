@@ -3,8 +3,8 @@ import java.awt.geom.Point2D;
 
 public class Asteroid extends Entity {
     public Asteroid(Scene scene) {
-        super((int) (Math.random() * scene.getWidth()),
-                (int) (Math.random() * scene.getHeight()),
+        super((int) (Math.random() * Game.getCurrentWidth()),
+                (int) (Math.random() * Game.getCurrentHeight()),
                 Math.toRadians(Math.random() * 180),
                 40, 0.1f, "asteroid", scene);
     }
@@ -15,9 +15,9 @@ public class Asteroid extends Entity {
 
         // Se sair da tela deve ser destruido
         Point2D position = this.transform.getPosition();
-        if (position.getX() > scene.getWidth() + size ||
+        if (position.getX() > Game.getCurrentWidth() + size ||
                 position.getX() < 0 - size ||
-                position.getY() > scene.getHeight() + size ||
+                position.getY() > Game.getCurrentHeight() + size ||
                 position.getY() < 0 - size) {
             this.destroy();
         }

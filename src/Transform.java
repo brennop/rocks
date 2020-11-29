@@ -11,7 +11,7 @@ public class Transform {
     public Transform(int x, int y, double rotation, int size) {
         this.size = size;
         affineTransform = new AffineTransform();
-        this.affineTransform.translate(x, y);
+        this.affineTransform.translate(x + size/2.0, y + size/2.0);
         this.affineTransform.rotate(rotation);
         this.rotation = rotation;
     }

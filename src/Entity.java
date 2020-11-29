@@ -1,5 +1,7 @@
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -36,9 +38,9 @@ public abstract class Entity {
         this.transform = new Transform(x, y, rotation, this.size);
     }
 
-    public void draw(Graphics g) {
+    public void draw(Graphics g, JPanel panel) {
         Graphics2D g2d = (Graphics2D) g; // transforma o Graphics em um Graphics2D
-        g2d.drawImage(this.texture, this.transform.getTransform(), this.scene); // desenha a imagem na tela usando o transform
+        g2d.drawImage(this.texture, this.transform.getTransform(), panel); // desenha a imagem na tela usando o transform
     }
 
     public void destroy() {
