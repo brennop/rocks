@@ -1,11 +1,20 @@
 public class GameScene extends Scene {
-    private final double asteroidInterval = 1000.0;
+    private final double asteroidInterval = 1000;
     private double timeToNextAsteroid = 0;
+    private Player player;
 
     @Override
     protected void start() {
         super.start();
 
+        player = new Player(this);
+        this.instantiate(player);
+
+        this.keyListener.bindKey("SPACE", 32);
+        this.keyListener.bindKey("UP", 87);
+        this.keyListener.bindKey("DOWN", 83);
+        this.keyListener.bindKey("LEFT", 65);
+        this.keyListener.bindKey("RIGHT", 68);
     }
 
     @Override

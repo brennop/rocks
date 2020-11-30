@@ -1,12 +1,11 @@
 public class Game {
     private final double TARGET_FPS = 60;
     private final double TARGET_FRAME_TIME = 1000000000 / TARGET_FPS;
-
+    private final Scene currentScene;
     // precisamos de uma thread para fazer o loop esperar
     // o período
     private Thread thread;
     private boolean isRunning = false;
-    private final Scene currentScene;
 
     public Game() {
         isRunning = true;

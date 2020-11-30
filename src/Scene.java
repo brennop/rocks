@@ -5,12 +5,23 @@ import java.util.ArrayList;
 public class Scene extends JPanel {
     protected ArrayList<Entity> entities = new ArrayList();
     private ArrayList<Entity> toRemove = new ArrayList();
+    protected KeyListener keyListener = new KeyListener();
 
     protected void start() {
         setPreferredSize(new Dimension(640, 480));
         setFocusable(true);
         requestFocus();
         setBackground(new Color(0, 0, 0));
+
+        this.addKeyListener(keyListener);
+    }
+
+    public KeyListener getKeyListener() {
+        return keyListener;
+    }
+
+    public void setKeyListener(KeyListener keyListener) {
+        this.keyListener = keyListener;
     }
 
     public void update(double dt) {
