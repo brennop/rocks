@@ -6,9 +6,9 @@ public class Main extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Game game = new Game();
         setContentPane(game.getCurrentScene());
-        pack();
         setLocationRelativeTo(null);
         setVisible(true);
+        pack();
         game.run();
     }
 

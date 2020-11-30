@@ -11,6 +11,7 @@ public class Game {
         isRunning = true;
 
         this.currentScene = new GameScene();
+        currentScene.start();
     }
 
     public Scene getCurrentScene() {
