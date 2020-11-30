@@ -25,5 +25,8 @@ public class Asteroid extends Entity {
 
     @Override
     public void onCollision(Entity entity) {
+        if (entity instanceof Bullet) {
+            this.destroy();
+        }
     }
 }

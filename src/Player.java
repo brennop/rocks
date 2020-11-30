@@ -8,6 +8,7 @@ public class Player extends Entity {
     private final float turnSpeed = 0.000005f;
     private float velocity = 0;
     private float angularVelocity = 0;
+    private int timeToShoot = 0;
 
     public Player(Scene scene) {
         super(
@@ -19,13 +20,26 @@ public class Player extends Entity {
                 "ship",
                 scene
         );
-
-        System.out.println((int) (Math.random() * scene.getWidth()));
-        System.out.println((int) (Math.random() * scene.getHeight()));
     }
 
     public void shoot() {
-        System.out.println("ainda nao implementado");
+        if (this.timeToShoot > 0) {
+            return;
+        }
+        Point2D position = this.transform.getPosition();
+        double rotation = Math.atan2(
+                this.transform.affineTransform.getShearY(),
+                this.transform.affineTransform.getScaleY()
+        );
+        System.out.println(rotation);
+
+        scene.add(new Bullet(
+                scene,
+                (int) position.getX(),
+                (int) position.getY(),
+                rotation - Math.PI + 0.75));
+
+        this.timeToShoot = 100;
     }
 
     public void updateSpeed(float speed) {
@@ -36,6 +50,11 @@ public class Player extends Entity {
     public void update(double dt) {
         super.update(dt);
         KeyListener kl = scene.getKeyListener();
+
+        // atira
+        if (kl.isKeyPressed("SPACE")) {
+            this.shoot();
+        }
 
         // Realiza a rotação
         if(kl.isKeyPressed("LEFT")) this.angularVelocity -= turnSpeed * dt;
@@ -65,5 +84,6 @@ public class Player extends Entity {
 
         this.velocity -= this.velocity * 0.001f * dt;
         this.angularVelocity -= this.angularVelocity * 0.001f * dt;
+        this.timeToShoot -= dt;
     }
 }

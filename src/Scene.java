@@ -5,7 +5,12 @@ import java.util.ArrayList;
 public class Scene extends JPanel {
     protected ArrayList<Entity> entities = new ArrayList();
     private ArrayList<Entity> toRemove = new ArrayList();
+    private ArrayList<Entity> toAdd = new ArrayList();
     protected KeyListener keyListener = new KeyListener();
+
+    public Scene() {
+        this.start();
+    }
 
     protected void start() {
         setPreferredSize(new Dimension(640, 480));
@@ -27,6 +32,7 @@ public class Scene extends JPanel {
     public void update(double dt) {
         // reseta a lista de remoção
         this.toRemove = new ArrayList();
+        this.toAdd = new ArrayList();
 
         for (Entity entity: this.entities) {
             entity.update(dt);
@@ -48,6 +54,7 @@ public class Scene extends JPanel {
         // remove os items depois da iteração
         // para evitar um ConcurrentModificationException
         entities.removeAll(toRemove);
+        entities.addAll(toAdd);
 
         this.repaint();
     }
@@ -65,6 +72,12 @@ public class Scene extends JPanel {
     public void remove(Entity entity) {
         // adiciona a lista para remoção ao final do update
         this.toRemove.add(entity);
+    }
+
+    public void add(Entity entity) {
+        // adiciona a lista para adição ao final do update
+        // usado por bullelt
+        this.toAdd.add(entity);
     }
 
     @Override
