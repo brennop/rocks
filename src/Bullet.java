@@ -27,9 +27,9 @@ public class Bullet extends Entity {
 
     @Override
     public void onCollision(Entity entity) {
-        if (entity instanceof Player || entity instanceof Bullet) {
-            return;
+        if (entity instanceof Asteroid) {
+            Game.increaseScore(100);
+            this.destroy();
         }
-        this.destroy();
     }
 }

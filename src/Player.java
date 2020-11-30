@@ -1,19 +1,20 @@
 import java.awt.geom.AffineTransform;
 
 public class Player extends Entity {
-    private final float turnSpeed = 0.00008f;
+    private final float turnSpeed = 0.00004f;
     private final float linearDamping = 50;
     private final float angularDamping = 100;
+    private final float bulletInterval = 400;
 
     private float velocity = 0;
-    private int timeToShoot = 0;
+    private float timeToShoot = 0;
     private float angularVelocity = 0;
 
     public Player(Scene scene) {
         super(
                 new AffineTransform(),
                 32,
-                0.0015f,
+                0.001f,
                 "ship",
                 scene
         );
@@ -62,7 +63,7 @@ public class Player extends Entity {
         bulletTransform.rotate(Math.PI);
         bulletTransform.translate(0,this.size/2.0);
         this.scene.instantiate(new Bullet(bulletTransform, this.scene));
-        this.timeToShoot = 200;
+        this.timeToShoot = bulletInterval;
     }
 
     @Override

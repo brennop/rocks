@@ -37,6 +37,10 @@ public class Game extends JPanel {
         Game.score = score;
     }
 
+    public static void increaseScore(int score) {
+        Game.score += score;
+    }
+
     public static void gameOver() {
         setCurrentScene(new GameOverScene());
         currentScene.start();
