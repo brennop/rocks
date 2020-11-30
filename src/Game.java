@@ -56,6 +56,11 @@ public class Game extends JPanel {
         return height;
     }
 
+    public static void startGame() {
+        setScore(0);
+        setCurrentScene(new GameScene());
+    }
+
     public void run() {
         long lastTime = System.nanoTime();
         while (true) {

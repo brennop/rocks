@@ -10,6 +10,8 @@ public class GameOverScene extends Scene {
 
     @Override
     protected void start() {
+        Game.getKeyListener().bindKey("SPACE", 32);
+
         try {
             File file = new File("./highscores.txt");
             if (!file.exists()) {
@@ -44,19 +46,26 @@ public class GameOverScene extends Scene {
     }
 
     @Override
+    public void update(double dt) {
+        super.update(dt);
+        if(Game.getKeyListener().isKeyPressed("SPACE")) Game.startGame();
+    }
+
+    @Override
     public void draw(Graphics g, JPanel panel) {
         Graphics2D g2d = (Graphics2D) g;
 
-        drawCentered(g2d, "Game Over", 40, 200);
-        drawCentered(g2d, "Score: " + Game.getScore(), 10, 220);
-        drawCentered(g2d, "Highscores: ", 20, 250);
+        drawCentered(g2d, "Game Over", 40, 150);
+        drawCentered(g2d, "Score: " + Game.getScore(), 10, 180);
+        drawCentered(g2d, "Highscores: ", 20, 200);
 
-        int index = 300;
+        int index = 220;
         for (Integer i : highscores) {
             drawCentered(g2d, String.valueOf(i), 10, index);
             index += 20;
         }
 
+        drawCentered(g2d, "Aperte ESPAÇO para começar de novo.", 15, 350);
     }
 
     private void drawCentered(Graphics2D g2d, String text, int size, int y) {
