@@ -70,7 +70,7 @@ public class Game extends JPanel {
             }
 
             try {
-                Thread.sleep(1);
+                Thread.sleep(5);
             } catch (Exception ignored) {
             }
         }

@@ -4,8 +4,8 @@ public class Player extends Entity {
     private final float turnSpeed = 0.00008f;
     private final float linearDamping = 50;
     private final float angularDamping = 100;
-
     private final Vector velocity = new Vector(0, 0);
+    private int timeToShoot = 0;
     private float angularVelocity = 0;
 
     public Player(Scene scene) {
@@ -14,14 +14,29 @@ public class Player extends Entity {
                 240,
                 0.0,
                 32,
-                0.0005f,
+                0.0015f,
                 "ship",
                 scene
         );
     }
 
     public void shoot() {
-        System.out.println("ainda nao implementado");
+        if (this.timeToShoot > 0) {
+            return;
+        }
+        Point2D position = this.transform.getPosition();
+        double rotation = Math.atan2(
+                this.transform.affineTransform.getShearY(),
+                this.transform.affineTransform.getScaleY()
+        );
+
+        this.scene.instantiate(new Bullet(
+                scene,
+                (int) position.getX(),
+                (int) position.getY(),
+                rotation - Math.PI + 0.75));
+
+        this.timeToShoot = 100;
     }
 
     public void updateSpeed(float speed) {
@@ -32,6 +47,8 @@ public class Player extends Entity {
     public void update(double dt) {
         KeyListener kl = Game.getKeyListener();
 
+        if (kl.isKeyPressed("SPACE")) this.shoot();
+
         // Realiza a rotação
         if (kl.isKeyPressed("LEFT")) this.angularVelocity -= turnSpeed * dt;
         if (kl.isKeyPressed("RIGHT")) this.angularVelocity += turnSpeed * dt;
@@ -41,7 +58,7 @@ public class Player extends Entity {
         //
         if (kl.isKeyPressed("UP")) {
             this.velocity.add(
-                    Math.sin(this.transform.getRotation()) * this.speed ,
+                    Math.sin(this.transform.getRotation()) * this.speed,
                     Math.cos(this.transform.getRotation()) * this.speed
             );
         }
@@ -65,10 +82,13 @@ public class Player extends Entity {
 
         this.velocity.add(-this.velocity.getX() * linearDamping * dt * 0.0001, -this.velocity.getY() * linearDamping * dt * 0.0001);
         this.angularVelocity -= this.angularVelocity * angularDamping * dt * 0.0001;
+
+        this.timeToShoot -= dt;
     }
 
     @Override
     public void onCollision(Entity entity) {
-        Game.gameOver();
+        if (entity instanceof Asteroid)
+            Game.gameOver();
     }
 }

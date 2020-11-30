@@ -16,16 +16,14 @@ public class Bullet extends Entity {
 
     @Override
     public void update(double dt) {
-        super.update(dt);
-
         this.transform.translate(this.speed * dt, this.speed * dt);
 
         // Se sair da tela deve ser destruido
         Point2D position = this.transform.getPosition();
-        if (position.getX() > scene.getWidth() + size ||
-                position.getX() < 0 - size ||
-                position.getY() > scene.getHeight() + size ||
-                position.getY() < 0 - size) {
+        if (position.getX() > Game.getCurrentWidth() + size ||
+                position.getX() < -size ||
+                position.getY() > Game.getCurrentHeight() + size ||
+                position.getY() < -size) {
             this.destroy();
         }
     }
