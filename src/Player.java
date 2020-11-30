@@ -42,15 +42,6 @@ public class Player extends Entity {
 
         this.transform.translate(0, -this.velocity * dt);
 
-        if (this.transform.getTranslateX() > Game.getCurrentWidth())
-            this.transform.translate(-Game.getCurrentWidth(), 0);
-        if (this.transform.getTranslateX() < 0)
-            this.transform.translate(Game.getCurrentWidth(), 0);
-        if (this.transform.getTranslateY() > Game.getCurrentHeight())
-            this.transform.translate(0, -Game.getCurrentHeight());
-        if (this.transform.getTranslateY() < 0)
-            this.transform.translate(0, Game.getCurrentHeight());
-
         this.velocity -= this.velocity * linearDamping * dt * 0.0001;
         this.angularVelocity -= this.angularVelocity * angularDamping * dt * 0.0001;
 

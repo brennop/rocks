@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameScene extends Scene {
-    private final double asteroidInterval = 700.0;
+    private final double asteroidInterval = 600.0;
     private double timeToNextAsteroid = 0;
     private Player player;
 
