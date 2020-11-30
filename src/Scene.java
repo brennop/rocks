@@ -2,27 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Scene extends JPanel {
-    protected ArrayList<Entity> entities = new ArrayList();
-    private ArrayList<Entity> toRemove = new ArrayList();
-    protected KeyListener keyListener = new KeyListener();
+public abstract class Scene {
+    protected ArrayList<Entity> entities = new ArrayList<Entity>();
+    private ArrayList<Entity> toRemove = new ArrayList<Entity>();
 
-    protected void start() {
-        setPreferredSize(new Dimension(640, 480));
-        setFocusable(true);
-        requestFocus();
-        setBackground(new Color(0, 0, 0));
-
-        this.addKeyListener(keyListener);
-    }
-
-    public KeyListener getKeyListener() {
-        return keyListener;
-    }
-
-    public void setKeyListener(KeyListener keyListener) {
-        this.keyListener = keyListener;
-    }
+    protected abstract void start();
 
     public void update(double dt) {
         // reseta a lista de remoção
@@ -49,14 +33,9 @@ public class Scene extends JPanel {
         // para evitar um ConcurrentModificationException
         entities.removeAll(toRemove);
 
-        this.repaint();
     }
 
-    public void draw(Graphics g) {
-        for (Entity entity: this.entities) {
-            entity.draw(g);
-        }
-    }
+    public abstract void draw(Graphics g, JPanel panel);
 
     protected void instantiate(Entity entity) {
         this.entities.add(entity);
@@ -67,9 +46,4 @@ public class Scene extends JPanel {
         this.toRemove.add(entity);
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        this.draw(g);
-    }
 }
