@@ -90,3 +90,35 @@ A classe Transform representa informações do sistema de coordenadas.
 
 Asteroid herda da classe Entity. No seu método `update`, se move em uma direção
 com velocidade constante e verifica se sua posição saiu da região da tela.
+
+### Bullet
+Bullet herda da classe Entity. Em seu método `onCollision` chama seu método
+`this.destroy()` caso tenha uma colisão com uma _Entity_ do tipo _Asteroid_,
+isso foi feito para que um _Bullet_ não anule um outro do mesmo tipo.
+
+### Player
+Player herda da classe Entity. Em seu método `onCollision` chama o método
+`Game.gameOver()` caso o objeto colidido seja do tipo _Asteroid_.
+Possui também o método `shoot()`, responsável por instanciar um novo objeto do tipo
+_Bullet_ em _Scene_.
+
+### Scene
+Scene é uma classe abstrata. Seu método mais utilizado, o `update(double dt)`, é
+responsável por fazer as atualizações na tela de acordo com as ações do jogo e com o tempo
+_dt_ passado, nesse método chama o update de toda sua lista de entidades, checa por colisões, e
+ao fim adiciona/remove entidades que colidiram ou foram criadas.
+
+### GameScene
+GameScene herda da classe Scene. Em seu método `start()` realiza o binding dos códigos
+de cada tecla para uma string, facilitando a leitura do código em outras classes,
+também é responsável por controlar o tempo em que novos `Asteroids` são criados já que também
+é responsável pela criação dos mesmos.
+
+### Game
+```java
+   private static final KeyListener keyListener = new KeyListener();
+   private static int score;
+   private static Scene currentScene;
+```
+Game herda da classe JPanel, é responsável por inicializar os principais componentes
+como tela, _timer_ e _KeyListener_. Também cria a instância da classe GameScene.
