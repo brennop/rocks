@@ -1,25 +1,31 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public abstract class Scene {
     protected ArrayList<Entity> entities = new ArrayList<Entity>();
+    private boolean isFirstIteration = true;
 
     protected abstract void start();
 
     public void update(double dt) {
-        for (Entity entity: new ArrayList<Entity>(entities) ) {
+        if (isFirstIteration) {
+            this.start();
+            this.isFirstIteration = false;
+            return;
+        }
+        for (Entity entity : new ArrayList<Entity>(entities)) {
             entity.update(dt);
         }
 
-        for (Entity firstEntity : new ArrayList<Entity>(entities)) {
-            for(Entity secondEntity : new ArrayList<Entity>(entities)) {
-                if(firstEntity != secondEntity) {
+        for (int i = 0; i < entities.size(); i++) {
+            Entity firstEntity = entities.get(i);
+            for (int j = 0; j < entities.size(); j++) {
+                Entity secondEntity = entities.get(j);
+                if (firstEntity != secondEntity) {
                     double distance = firstEntity.getPosition().distanceSq(secondEntity.getPosition());
                     double radius = firstEntity.size / 2.0 + secondEntity.size / 2.0;
-                    if(distance < radius * radius) {
+                    if (distance < radius * radius) {
                         firstEntity.onCollision(secondEntity);
                         secondEntity.onCollision(firstEntity);
                     }

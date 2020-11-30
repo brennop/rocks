@@ -46,6 +46,15 @@ public class Player extends Entity {
         this.angularVelocity -= this.angularVelocity * angularDamping * dt * 0.0001;
 
         this.timeToShoot -= dt;
+
+        // Se sair da tela deve ocorrer game over
+        if (this.transform.getTranslateX() > Game.getCurrentWidth() + size ||
+                this.transform.getTranslateX() < -size ||
+                this.transform.getTranslateY() > Game.getCurrentHeight() + size ||
+                this.transform.getTranslateY() < -size) {
+            Game.gameOver();
+        }
+
     }
 
     public void shoot() {

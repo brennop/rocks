@@ -19,12 +19,6 @@ public abstract class Entity {
         this.size = size;
         this.transform = transform;
 
-        /*
-        this.transform = new AffineTransform();
-        this.transform.translate(x + size/2.0, y + size/2.0);
-        this.transform.rotate(rotation);
-         */
-
         try {
             texture = ImageIO.read(new File("assets/" + filename + ".png"));
         } catch (Exception exception) {

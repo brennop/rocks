@@ -22,7 +22,6 @@ public class Game extends JPanel {
         this.addKeyListener(keyListener);
 
         Game.currentScene = new GameScene();
-        currentScene.start();
     }
 
     public static KeyListener getKeyListener() {
@@ -43,7 +42,6 @@ public class Game extends JPanel {
 
     public static void gameOver() {
         setCurrentScene(new GameOverScene());
-        currentScene.start();
     }
 
     public static void setCurrentScene(Scene scene) {
