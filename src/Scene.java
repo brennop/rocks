@@ -4,35 +4,34 @@ import java.util.ArrayList;
 
 public abstract class Scene {
     protected ArrayList<Entity> entities = new ArrayList<Entity>();
-    private ArrayList<Entity> toRemove = new ArrayList<Entity>();
+    private boolean isFirstIteration = true;
 
     protected abstract void start();
 
     public void update(double dt) {
-        // reseta a lista de remoção
-        this.toRemove = new ArrayList();
-
-        for (Entity entity: this.entities) {
+        if (isFirstIteration) {
+            this.start();
+            this.isFirstIteration = false;
+            return;
+        }
+        for (Entity entity : new ArrayList<Entity>(entities)) {
             entity.update(dt);
         }
 
-        for (Entity firstEntity : entities) {
-            for(Entity secondEntity : entities) {
-                if(firstEntity != secondEntity) {
-                    double distance = firstEntity.transform.getPosition().distanceSq(secondEntity.transform.getPosition());
+        for (int i = 0; i < entities.size(); i++) {
+            Entity firstEntity = entities.get(i);
+            for (int j = 0; j < entities.size(); j++) {
+                Entity secondEntity = entities.get(j);
+                if (firstEntity != secondEntity) {
+                    double distance = firstEntity.getPosition().distanceSq(secondEntity.getPosition());
                     double radius = firstEntity.size / 2.0 + secondEntity.size / 2.0;
-                    if(distance < radius * radius) {
+                    if (distance < radius * radius) {
                         firstEntity.onCollision(secondEntity);
                         secondEntity.onCollision(firstEntity);
                     }
                 }
             }
         }
-
-        // remove os items depois da iteração
-        // para evitar um ConcurrentModificationException
-        entities.removeAll(toRemove);
-
     }
 
     public abstract void draw(Graphics g, JPanel panel);
@@ -43,7 +42,7 @@ public abstract class Scene {
 
     public void remove(Entity entity) {
         // adiciona a lista para remoção ao final do update
-        this.toRemove.add(entity);
+        this.entities.remove(entity);
     }
 
 }

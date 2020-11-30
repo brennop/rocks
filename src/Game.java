@@ -22,7 +22,6 @@ public class Game extends JPanel {
         this.addKeyListener(keyListener);
 
         Game.currentScene = new GameScene();
-        currentScene.start();
     }
 
     public static KeyListener getKeyListener() {
@@ -37,9 +36,12 @@ public class Game extends JPanel {
         Game.score = score;
     }
 
+    public static void increaseScore(int score) {
+        Game.score += score;
+    }
+
     public static void gameOver() {
         setCurrentScene(new GameOverScene());
-        currentScene.start();
     }
 
     public static void setCurrentScene(Scene scene) {
@@ -52,6 +54,11 @@ public class Game extends JPanel {
 
     public static int getCurrentHeight() {
         return height;
+    }
+
+    public static void startGame() {
+        setScore(0);
+        setCurrentScene(new GameScene());
     }
 
     public void run() {
