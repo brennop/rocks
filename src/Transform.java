@@ -11,7 +11,7 @@ public class Transform {
     public Transform(int x, int y, double rotation, int size) {
         this.size = size;
         affineTransform = new AffineTransform();
-        this.affineTransform.translate(x, y);
+        this.affineTransform.translate(x + size/2.0, y + size/2.0);
         this.affineTransform.rotate(rotation);
         this.rotation = rotation;
     }
@@ -24,9 +24,21 @@ public class Transform {
         affineTransform.setTransform(affineTransform);
     }
 
+    public double getX() {
+        return affineTransform.getTranslateX();
+    }
+
+    public double getY() {
+        return affineTransform.getTranslateY();
+    }
+
     public void rotate(double theta) {
-        this.rotation = rotation;
-        this.affineTransform.rotate(theta, this.size / 2, this.size / 2);
+        this.rotation = theta;
+        this.affineTransform.rotate(theta, this.size / 2.0, this.size / 2.0);
+    }
+
+    public double getRotation() {
+        return rotation;
     }
 
     public void translate(double dx, double dy) {
