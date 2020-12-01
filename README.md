@@ -1,6 +1,11 @@
-# rocks
+# Clone do jogo Asteróides
 
-## Descrição de Problema
+**Técnicas de Programação 1**
+
+- Brenno Pereira Cordeiro - 190127465
+- Joao Vitor Maia Ferreira - 190110007
+
+## 1. Descrição de Problema
 
 Neste projeto, desenvolvemos um clone do jogo Asteroids usando a linguagem de
 programação Java e os conceitos de programação orientada a objetos.
@@ -17,12 +22,11 @@ jogador. No entanto, nosso objetivo é bem mais simples, pensando apenas em
 implementar o fluxo básico do jogo, para desenvolver a prática dos conceitos de
 orientação à objeto.
 
-## Regras de Negócio
+## 2. Regras de Negócio
 
 1. O _jogador_ pode se mover livremente pela tela do jogo, usando as teclas `a`
    e `d` para rotacionar a nava, e a tecla `w` para adicionar propulsão.
-2. Ao atingir a borda da tela do jogo, o _jogador_ deve ser movido para a borda
-   oposta.
+2. Ao sair da tela do jogo, o **fim do jogo** deve ocorrer.
 3. Durante o jogo, _asteróides_ aparecem em posições aleatórias.
 4. Um _asteróide_ deverá ser destruído ao sair da região da tela.
 5. O _jogador_ é capaz de atirar um número ilimitado de _balas_ com uma certa
@@ -37,7 +41,7 @@ orientação à objeto.
 12. O usuário pode inserir o seu nome no **fim do jogo** para salvar sua
     pontuação.
 
-## Diagram de Classes
+## 3. Diagram de Classes
 
 ### Game
 
@@ -49,7 +53,7 @@ conta o tempo nos cálculos.
 Cada iteração do loop de jogo vamos chamar de _frame_, e o tempo levado por um
 _frame_ vamos chamar de _delta time_ ou `dt`. A cada frame a classe Game chama o
 método `update` da cena atual, informando o delta time para o método. A
-implementação do loop de jogo é baseada no artigo [Fix Your Timestep!](https://www.gafferongames.com/post/fix_your_timestep/).
+implementação do loop de jogo é baseada no artigo [Fix Your Timestep!][timestep].
 
 ### Scene
 
@@ -82,43 +86,51 @@ ser destruída, e os métodos abstratos `update`, chamada a cada frame com o del
 time, e `onCollision`, chamado quando ocorre uma colisão envolvendo aquela
 entidade.
 
-### Transform
-
-A classe Transform representa informações do sistema de coordenadas.
-
 ### Asteroid
 
 Asteroid herda da classe Entity. No seu método `update`, se move em uma direção
 com velocidade constante e verifica se sua posição saiu da região da tela.
 
 ### Bullet
+
 Bullet herda da classe Entity. Em seu método `onCollision` chama seu método
-`this.destroy()` caso tenha uma colisão com uma _Entity_ do tipo _Asteroid_,
+`destroy()` caso tenha uma colisão com uma _Entity_ do tipo _Asteroid_,
 isso foi feito para que um _Bullet_ não anule um outro do mesmo tipo.
 
 ### Player
+
 Player herda da classe Entity. Em seu método `onCollision` chama o método
 `Game.gameOver()` caso o objeto colidido seja do tipo _Asteroid_.
-Possui também o método `shoot()`, responsável por instanciar um novo objeto do tipo
-_Bullet_ em _Scene_.
+
+Possui também o método `shoot()`, responsável por instanciar um novo objeto do
+tipo _Bullet_ na _Scene_.
 
 ### Scene
-Scene é uma classe abstrata. Seu método mais utilizado, o `update(double dt)`, é
-responsável por fazer as atualizações na tela de acordo com as ações do jogo e com o tempo
-_dt_ passado, nesse método chama o update de toda sua lista de entidades, checa por colisões, e
-ao fim adiciona/remove entidades que colidiram ou foram criadas.
+
+Scene é uma classe abstrata. Seu método principal, o `update(double dt)`, é
+responsável por fazer as atualizações na tela de acordo com as ações do jogo e
+com o tempo _dt_ passado, nesse método chama o update de toda sua lista de
+entidades, checa por colisões, e ao fim adiciona/remove entidades que colidiram
+ou foram criadas.
 
 ### GameScene
-GameScene herda da classe Scene. Em seu método `start()` realiza o binding dos códigos
-de cada tecla para uma string, facilitando a leitura do código em outras classes,
-também é responsável por controlar o tempo em que novos `Asteroids` são criados já que também
-é responsável pela criação dos mesmos.
 
-### Game
-```java
-   private static final KeyListener keyListener = new KeyListener();
-   private static int score;
-   private static Scene currentScene;
-```
-Game herda da classe JPanel, é responsável por inicializar os principais componentes
-como tela, _timer_ e _KeyListener_. Também cria a instância da classe GameScene.
+GameScene herda da classe Scene. Em seu método `start()` realiza o binding dos
+códigos de cada tecla para uma string, facilitando a leitura do código em outras
+classes, também é responsável por controlar o tempo em que novos `Asteroids` são
+criados já que também é responsável pela criação dos mesmos.
+
+### GameOverScene
+
+Essa classe representa a tela de **fim de jogo**. Ela é responsável por mostrar
+a mensagem de **fim de jogo** ao usuário, assim como ler e escrever no arquivo
+de pontuações, com as 5 maiores ponturações.
+
+### KeyListener
+
+Essa classe guarda o estado dos 256 códigos do teclado. Durante o `update` das
+entidades, é possível obter o estado de uma determinada tecla para executar uma
+determinada ação. Também é possível associar um nome a um código, para manter o
+código mais legível.
+
+[timestep]: https://www.gafferongames.com/post/fix_your_timestep/
