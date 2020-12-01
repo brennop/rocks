@@ -2,11 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public abstract class Scene {
+public abstract class Scene implements Updatable {
     protected ArrayList<Entity> entities = new ArrayList<Entity>();
     private boolean isFirstIteration = true;
-
-    protected abstract void start();
 
     public void update(double dt) {
         // Na primeira iteração, deve chamar o 

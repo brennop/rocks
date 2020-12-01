@@ -7,7 +7,7 @@ public class GameScene extends Scene {
     private Player player;
 
     @Override
-    protected void start() {
+    public void start() {
         // Cria um novo Player na cena
         player = new Player(this);
         this.instantiate(player);

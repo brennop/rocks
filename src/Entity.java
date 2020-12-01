@@ -6,7 +6,7 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public abstract class Entity {
+public abstract class Entity implements Updatable{
     protected final int size;
     protected float speed;
     protected AffineTransform transform;
@@ -32,8 +32,6 @@ public abstract class Entity {
     /*
      * Métodos abstratos da entidade
      */
-    public abstract void update(double dt);
-    public abstract void start();
     public abstract void onCollision(Entity entity);
 
     // Desenha a entidade no centro da sua imagem

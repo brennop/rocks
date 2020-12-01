@@ -9,7 +9,7 @@ public class GameOverScene extends Scene {
     private final ArrayList<Integer> highscores = new ArrayList();
 
     @Override
-    protected void start() {
+    public void start() {
         // Associa o código 32 (barra de espaço)
         // ao nome "SPACE"
         Game.getKeyListener().bindKey("SPACE", 32);
