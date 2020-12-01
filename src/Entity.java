@@ -6,7 +6,7 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public abstract class Entity {
+public abstract class Entity implements Updatable{
     protected final int size;
     protected float speed;
     protected AffineTransform transform;
@@ -19,6 +19,7 @@ public abstract class Entity {
         this.size = size;
         this.transform = transform;
 
+        // Lê o arquivo da sua imagem
         try {
             texture = ImageIO.read(new File("assets/" + filename + ".png"));
         } catch (Exception exception) {
@@ -28,11 +29,12 @@ public abstract class Entity {
         this.start();
     }
 
-    public abstract void update(double dt);
-    public abstract void start();
-
+    /*
+     * Métodos abstratos da entidade
+     */
     public abstract void onCollision(Entity entity);
 
+    // Desenha a entidade no centro da sua imagem
     public void draw(Graphics g, JPanel panel) {
         Graphics2D g2d = (Graphics2D) g; // transforma o Graphics em um Graphics2D
         this.transform.translate(-this.size/2.0, -this.size/2.0);
@@ -40,10 +42,12 @@ public abstract class Entity {
         this.transform.translate(this.size/2.0, this.size/2.0);
     }
 
+    // Remove a entidade da cena
     public void destroy() {
         this.scene.remove(this);
     }
 
+    // Obtém a posição atual no sistema de coordenadas
     public Point2D getPosition() {
         return new Point((int) transform.getTranslateX(), (int) transform.getTranslateY());
     }
