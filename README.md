@@ -43,6 +43,8 @@ orientação à objeto.
 
 ## 3. Diagram de Classes
 
+![Diagrama de Classes](diagramauml.png)
+
 ### Game
 
 A classe Game é responsável por selecionar a _cena_ atual e criar o _loop de
@@ -65,14 +67,6 @@ Cada cena do jogo herda dessa classe, e implementa sua própria lógica para
 interagir com o ciclo de vida.
 
 ### Entity
-
-```java
-    protected final int size;
-    protected float speed;
-    protected Transform transform;
-    protected final Scene scene;
-    private BufferedImage texture;
-```
 
 A classe abstrata Entity, ou _entidade_, é uma abstração de todos os elementos
 que serão desenhados na tela. Uma entidade possui tamanho, velocidade, um
@@ -114,15 +108,12 @@ entidades, checa por colisões, e ao fim adiciona/remove entidades que colidiram
 ou foram criadas.
 
 ### Game
-```java
-   private static final KeyListener keyListener = new KeyListener();
-   private static int score;
-   private static Scene currentScene;
-```
+
 Game herda da classe JPanel, é responsável por inicializar os principais componentes
 como tela, _timer_ e _KeyListener_. Também cria a instância da classe GameScene.
 
 ### GameScene
+
 GameScene herda da classe Scene. Em seu método `start()` realiza o binding dos
 códigos de cada tecla para uma string, facilitando a leitura do código em outras
 classes, também é responsável por controlar o tempo em que novos `Asteroids` são
@@ -142,7 +133,3 @@ determinada ação. Também é possível associar um nome a um código, para man
 código mais legível.
 
 [timestep]: https://www.gafferongames.com/post/fix_your_timestep/
-
-
-# Diagrama
-![diagrama](diagramauml.png)
