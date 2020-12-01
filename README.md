@@ -38,8 +38,7 @@ orientação à objeto.
 9. Uma _bala_ é destruída ao colidir com um _asteróide_.
 10. A _pontuação_ é incrementada quando um _asteróide_ colide com uma _bala_.
 11. O **fim do jogo** ocorre quando um _asteróide_ colide com o _jogador_.
-12. O usuário pode inserir o seu nome no **fim do jogo** para salvar sua
-    pontuação.
+12. Ao final do jogo as pontuações mais altas ficam salvas em um arquivo.
 
 ## 3. Diagram de Classes
 

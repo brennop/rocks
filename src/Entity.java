@@ -5,6 +5,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
 
 public abstract class Entity implements Updatable{
     protected final int size;
@@ -21,7 +22,8 @@ public abstract class Entity implements Updatable{
 
         // Lê o arquivo da sua imagem
         try {
-            texture = ImageIO.read(new File("assets/" + filename + ".png"));
+            InputStream in = getClass().getResourceAsStream(filename + ".png");
+            texture = ImageIO.read(in);
         } catch (Exception exception) {
             assert false;
         }

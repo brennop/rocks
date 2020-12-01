@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="rocks:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/rocks_jar</output-path>
+    <root id="archive" name="rocks.jar">
+      <element id="module-output" name="rocks" />
+      <element id="dir-copy" path="$PROJECT_DIR$/assets" />
+    </root>
+  </artifact>
+</component>
