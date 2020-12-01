@@ -9,9 +9,10 @@ public class Bullet extends Entity {
 
     @Override
     public void update(double dt) {
-        this.transform.translate(0,this.speed * dt);
+        // Se move numa linha reta, na direção inicial
+        this.transform.translate(0, this.speed * dt);
 
-        // Se sair da tela deve ser destruido
+        // Se sair da tela deve ser destruído
         if (this.transform.getTranslateX() > Game.getCurrentWidth() + size ||
                 this.transform.getTranslateX() < -size ||
                 this.transform.getTranslateY() > Game.getCurrentHeight() + size ||
@@ -21,12 +22,12 @@ public class Bullet extends Entity {
     }
 
     @Override
-    public void start() {
-
-    }
+    public void start() {}
 
     @Override
     public void onCollision(Entity entity) {
+        // Se colidir com um asteroid, deve ser destruído 
+        // e incrementar o _score_
         if (entity instanceof Asteroid) {
             Game.increaseScore(100);
             this.destroy();
