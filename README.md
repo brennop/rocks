@@ -122,3 +122,8 @@ também é responsável por controlar o tempo em que novos `Asteroids` são cria
 ```
 Game herda da classe JPanel, é responsável por inicializar os principais componentes
 como tela, _timer_ e _KeyListener_. Também cria a instância da classe GameScene.
+
+
+
+# Diagrama
+![diagrama](diagramauml.png)
