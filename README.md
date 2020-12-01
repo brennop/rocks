@@ -40,7 +40,7 @@ orientação à objeto.
 11. O **fim do jogo** ocorre quando um _asteróide_ colide com o _jogador_.
 12. Ao final do jogo as pontuações mais altas ficam salvas em um arquivo.
 
-## 3. Diagram de Classes
+## 3. Diagrama de Classes
 
 ![Diagrama de Classes](diagramauml.png)
 
